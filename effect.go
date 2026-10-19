@@ -445,6 +445,7 @@ func generate(bd *bestdori.Client, bundles *cdn.Client, spec master.Effect, shar
 	if err != nil {
 		return nil, err
 	}
+	holdMarkers(hold, sheet[holdCue].Limit, add)
 
 	// Standard Sonolus names as aliases of the original cues.
 	aliases := []struct{ std, target string }{
@@ -546,6 +547,40 @@ func holdClips(pcm *audioutil.PCM, cue *cri.Cue, add func(clip, file string, dat
 			fmt.Sprintf("derived: %s samples [0, %d)", holdCue, start), "play first; start the #loop clip introSeconds later")
 	}
 	return hold, holdCue + "_loop.wav", nil
+}
+
+// Hold marker clips. A Sonolus engine can read neither clip lengths nor item
+// metadata, so the hold sound's per-item properties are the existence of
+// 1-sample silent clips (optional in the engine):
+//
+//	notgarupa/hold/introUsBit<k>  bit k of the intro length (LoopStart) in µs
+//	notgarupa/hold/onceUsBit<k>   bit k of the cue length in µs when it does not loop
+//	notgarupa/hold/noCueLimit     the hold cue has no cue limit
+const (
+	holdMarkerPrefix = "notgarupa/hold/"
+	holdMarkerBits   = 24 // up to 16.7 s
+)
+
+func holdMarkers(hold ContractHold, limit int, add func(clip, file string, data []byte, seconds float64, loop bool, source, note string)) {
+	marker := (&audioutil.PCM{SampleRate: 44100, Channels: 1, Samples: make([]float64, 1)}).WAV()
+	mark := func(name, note string) { add(holdMarkerPrefix+name, "marker.wav", marker, 0, false, "marker", note) }
+	bits := func(name string, seconds float64, note string) {
+		us := int(math.Round(seconds * 1e6))
+		for k := range holdMarkerBits {
+			if us>>k&1 == 1 {
+				mark(fmt.Sprintf("%s%d", name, k), fmt.Sprintf("%s: bit %d of %d µs", note, k, us))
+			}
+		}
+	}
+	if hold.Loop && hold.IntroSeconds > 0 {
+		bits("introUsBit", hold.IntroSeconds, "hold intro length")
+	}
+	if !hold.Loop {
+		bits("onceUsBit", float64(hold.Samples)/float64(hold.SampleRate), "length of the non-looping hold cue")
+	}
+	if limit < 0 {
+		mark("noCueLimit", "the hold cue has no cue limit")
+	}
 }
 
 func zipFiles(files map[string][]byte) ([]byte, error) {

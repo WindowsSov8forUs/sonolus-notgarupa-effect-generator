@@ -29,6 +29,7 @@
 - `#intro`：只有循环起点不为 0 时才有（`skin_maid`、`skin_coin`、`skinapril2021`、`skin_stage`、`skin_delta`），即 `[0, LoopStart)`；先播放它，`introSeconds` 后开始播放 `#loop`。
 - `#release`：松开时的 0.3 s 线性淡出尾（原作代码常量）。
 - `skin_april2019` 的按住 cue 不循环（只播放一次），没有 `#loop`，`#HOLD` 指向整个 cue。
+- 标记 clip（1 采样的静音）：Sonolus 引擎读不到 clip 时长与条目元数据，所以按住音的条目属性以 clip 是否存在表示，引擎在初始化时读取：`notgarupa/hold/introUsBit<k>` 为 `#intro` 时长（µs）的第 k 位，`notgarupa/hold/onceUsBit<k>` 为不循环的 cue 时长（µs）的第 k 位，`notgarupa/hold/noCueLimit` 表示按住 cue 没有同时发声上限（`skin_delta`）。skin00 等普通条目没有标记。
 
 Miss 无音效（生成静音以便别名完整）。
 
