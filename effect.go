@@ -74,8 +74,10 @@ type Source struct {
 	// CacheDir caches downloads (Bestdori files under <CacheDir>/bestdori);
 	// empty disables the disk cache.
 	CacheDir string
-	// Region is the Bestdori server region ("" = jp).
-	Region string
+	// Regions is the Bestdori server priority order (nil:
+	// jp, en, tw, cn, kr). Each bundle comes from the first server that has
+	// it, so server-exclusive assets are found too.
+	Regions []string
 	// Offline fails every download that is not already cached.
 	Offline bool
 	// HTTPClient is used for downloads (nil: a client with a 90 s timeout).
@@ -90,9 +92,7 @@ func (s Source) bestdori(ctx context.Context) *bestdori.Client {
 		cache = filepath.Join(s.CacheDir, "bestdori")
 	}
 	b := bestdori.New(cache)
-	if s.Region != "" {
-		b.Region = s.Region
-	}
+	b.Regions = s.Regions
 	if s.HTTPClient != nil {
 		b.HTTP = s.HTTPClient
 	}

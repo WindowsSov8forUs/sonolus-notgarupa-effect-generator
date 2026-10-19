@@ -18,7 +18,7 @@ sonolus-notgarupa-effect-generator [-tapse skin00] [-directional-se directionalf
 程序内置所需的 APK 资源，其余素材联网下载到 `-cache`（默认当前目录的 `.cache/`）。`-version` 输出版本号。
 
 - `-format wav`（默认）：无缝解码后的 PCM，起点与原作一致（MP3 编码器延迟已去除）；`mp3`：原始字节。
-- 来源：Bestdori（`sound/tapseskin/*`、`sound/common` 等），运行时下载到 `.cache/`；只有 APK 内置的 `decide_1`（不在 AssetBundle 中）随项目放在 `assets/apk/sound/common-se/`。
+- 来源：Bestdori（`sound/tapseskin/*`、`sound/common` 等，按 `-regions` 的服务器优先级取第一个拥有该 bundle 的服务器），运行时下载到 `.cache/`；只有 APK 内置的 `decide_1`（不在 AssetBundle 中）随项目放在 `assets/apk/sound/common-se/`。
 - `SE_RHYTHM_TAP_LONG#loop` 为循环段（0–22997 采样），`#release` 为 0.3 s 淡出尾。Miss 无音效（生成静音以便别名完整）。
 
 ## 作为 Go 库
@@ -34,7 +34,7 @@ r, err := effect.Generate(ctx, effect.Options{
 ```
 
 - `Options` 的零值即命令行的默认值：`TapSE`、`DirectionalSE`、`Format`（`effect.WAV` / `effect.MP3`）、`Name`。
-- `Source` 控制下载：`CacheDir`、`Region`、`Offline`、`HTTPClient`、`Log`；`Generate` 的 `ctx` 可取消下载。多个生成器可以共用同一个 `CacheDir`（缓存写入是原子的）。
+- `Source` 控制下载：`CacheDir`、`Regions`（服务器优先级，默认 jp、en、tw、cn、kr）、`Offline`、`HTTPClient`、`Log`；`Generate` 的 `ctx` 可取消下载。多个生成器可以共用同一个 `CacheDir`（缓存写入是原子的）。
 - 返回 `*effect.Result`：`Item`（sonolus-core-go 的 `database.DatabaseEffectItem`，资源字段留空）、Data（`resource.EffectData`）、Audio（音频 zip）、Thumbnail（PNG）与 Contract（即 `contract.json` 的内容）。
 - `Result.Files()` 按 item.json 的字段名返回资源字节："thumbnail"、"data"（已 gzip 压缩）、"audio"。
 - `effect.WriteSource(dir, results...)` 把结果写成 sonolus-pack 源目录（命令行就是 `Generate` + `WriteSource` + sonolus-pack-go）。
@@ -56,7 +56,7 @@ s.Effect.Items = append(s.Effect.Items, sonolusserver.EffectItemModel{DatabaseEf
 | `-out` | `out/source` | 重新生成的 sonolus-pack 源目录 |
 | `-pack` | `out/pack` | 用 sonolus-pack-go 打包到该目录（空字符串则跳过） |
 | `-cache` | `.cache` | 下载缓存目录 |
-| `-region` | `jp` | Bestdori 服务器区域（jp、en、tw、cn、kr） |
+| `-regions` | `jp,en,tw,cn,kr` | Bestdori 服务器优先级。各服有独占素材，每个 bundle 取自第一个拥有它的服务器（该 bundle 的全部文件都来自同一服）；某服没有时记录在缓存中，`-offline` 重跑时选择相同的服务器 |
 | `-offline` | false | 只使用缓存中的下载 |
 | `-v` | false | 输出下载日志 |
 | `-version` | false | 输出版本号后退出 |

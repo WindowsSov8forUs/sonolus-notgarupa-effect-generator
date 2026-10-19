@@ -31,7 +31,7 @@ func main() {
 		return
 	}
 	o.Format = effect.Format(*format)
-	o.Source = effect.Source{CacheDir: common.Cache, Region: common.Region, Offline: common.Offline, Log: common.Logf()}
+	o.Source = effect.Source{CacheDir: common.Cache, Regions: common.Regions, Offline: common.Offline, Log: common.Logf()}
 
 	r, err := effect.Generate(context.Background(), o)
 	if err != nil {
