@@ -1,0 +1,241 @@
+{
+  "clips": [
+    {
+      "name": "perfect",
+      "file": "perfect.wav",
+      "seconds": 0.7483219954648526,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/perfect.mp3"
+    },
+    {
+      "name": "great",
+      "file": "great.wav",
+      "seconds": 0.4998639455782313,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/great.mp3"
+    },
+    {
+      "name": "good",
+      "file": "good.wav",
+      "seconds": 0.499750566893424,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/good.mp3"
+    },
+    {
+      "name": "flick",
+      "file": "flick.wav",
+      "seconds": 1.1784126984126984,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/flick.mp3"
+    },
+    {
+      "name": "game_button",
+      "file": "game_button.wav",
+      "seconds": 0.19954648526077098,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/game_button.mp3",
+      "note": "empty-lane tap"
+    },
+    {
+      "name": "SE_RHYTHM_TAP_LONG",
+      "file": "SE_RHYTHM_TAP_LONG.wav",
+      "seconds": 0.5272789115646258,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/skin00/SE_RHYTHM_TAP_LONG.mp3",
+      "note": "whole cue; use #loop for PlayLooped"
+    },
+    {
+      "name": "directional_fl",
+      "file": "directional_fl.wav",
+      "seconds": 1.0826666666666667,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/directionalflickskin00/directional_fl.mp3"
+    },
+    {
+      "name": "directional_fl_2",
+      "file": "directional_fl_2.wav",
+      "seconds": 1.0826666666666667,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/directionalflickskin00/directional_fl_2.mp3"
+    },
+    {
+      "name": "directional_fl_3",
+      "file": "directional_fl_3.wav",
+      "seconds": 1.3015,
+      "loop": false,
+      "source": "bestdori sound/tapseskin/directionalflickskin00/directional_fl_3.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_TAP_SKILL",
+      "file": "SE_RHYTHM_TAP_SKILL.wav",
+      "seconds": 0.9462131519274376,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_TAP_SKILL.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_CUTIN_SKILL",
+      "file": "SE_RHYTHM_CUTIN_SKILL.wav",
+      "seconds": 3.7885714285714287,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_CUTIN_SKILL.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_CUTIN_AUDIENCE",
+      "file": "SE_RHYTHM_CUTIN_AUDIENCE.wav",
+      "seconds": 4.466666666666667,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_CUTIN_AUDIENCE.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_FULLCOMBO",
+      "file": "SE_RHYTHM_FULLCOMBO.wav",
+      "seconds": 1.172607709750567,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_FULLCOMBO.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_CLEAR",
+      "file": "SE_RHYTHM_CLEAR.wav",
+      "seconds": 2.4398412698412697,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_CLEAR.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_CLEAR_VO",
+      "file": "SE_RHYTHM_CLEAR_VO.wav",
+      "seconds": 3.4097278911564626,
+      "loop": false,
+      "source": "bestdori sound/common/SE_RHYTHM_CLEAR_VO.mp3"
+    },
+    {
+      "name": "SE_RHYTHM_GAYA",
+      "file": "SE_RHYTHM_GAYA.wav",
+      "seconds": 7.0338095238095235,
+      "loop": true,
+      "source": "bestdori sound/common/SE_RHYTHM_GAYA.mp3",
+      "note": "crowd loop, whole buffer"
+    },
+    {
+      "name": "decide_1",
+      "file": "decide_1.wav",
+      "seconds": 0.7836734693877551,
+      "loop": false,
+      "source": "APK sound/common-se/decide_1.mp3",
+      "note": "pause/dialog button"
+    },
+    {
+      "name": "miss",
+      "file": "miss.wav",
+      "seconds": 0.1,
+      "loop": false,
+      "source": "generated silence (original miss/bad cues are silent)",
+      "note": "only for #MISS"
+    },
+    {
+      "name": "SE_RHYTHM_TAP_LONG#loop",
+      "file": "SE_RHYTHM_TAP_LONG_loop.wav",
+      "seconds": 0.5214739229024943,
+      "loop": true,
+      "source": "derived: SE_RHYTHM_TAP_LONG samples [0, 22997)",
+      "note": "PlayLooped this clip for Long/Slide holds"
+    },
+    {
+      "name": "SE_RHYTHM_TAP_LONG#release",
+      "file": "SE_RHYTHM_TAP_LONG_release.wav",
+      "seconds": 0.30000001192092896,
+      "loop": false,
+      "source": "derived: SE_RHYTHM_TAP_LONG#loop with 0.3 s linear fade",
+      "note": "play when a hold loop is stopped"
+    },
+    {
+      "name": "#PERFECT",
+      "file": "perfect.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "perfect"
+    },
+    {
+      "name": "#GREAT",
+      "file": "great.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "great"
+    },
+    {
+      "name": "#GOOD",
+      "file": "good.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "good"
+    },
+    {
+      "name": "#MISS",
+      "file": "miss.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "miss"
+    },
+    {
+      "name": "#PERFECT_ALTERNATIVE",
+      "file": "flick.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "flick"
+    },
+    {
+      "name": "#GREAT_ALTERNATIVE",
+      "file": "flick.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "flick"
+    },
+    {
+      "name": "#GOOD_ALTERNATIVE",
+      "file": "flick.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "flick"
+    },
+    {
+      "name": "#MISS_ALTERNATIVE",
+      "file": "miss.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "miss"
+    },
+    {
+      "name": "#HOLD",
+      "file": "SE_RHYTHM_TAP_LONG_loop.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "SE_RHYTHM_TAP_LONG#loop"
+    },
+    {
+      "name": "#HOLD_ALTERNATIVE",
+      "file": "SE_RHYTHM_TAP_LONG_loop.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "SE_RHYTHM_TAP_LONG#loop"
+    },
+    {
+      "name": "#STAGE",
+      "file": "game_button.wav",
+      "seconds": 0,
+      "loop": false,
+      "source": "",
+      "aliasFor": "game_button"
+    }
+  ],
+  "effect": "notgarupa-skin00",
+  "format": "wav"
+}
