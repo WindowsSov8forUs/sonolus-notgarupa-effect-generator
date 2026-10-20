@@ -1,6 +1,6 @@
 # sonolus-notgarupa-effect-generator
 
-生成 NotGarupa 的全部音效条目：原作的判定音（Perfect / Great / Good、Flick、方向键 1–3 连）、空击、技能、Long 按住音与松开、Full Combo / Clear / 通关语音等，名称与原作 cue 名一致，另附 Sonolus 标准名（`#PERFECT`、`#GREAT`、`#GOOD`、`#HOLD` 等）作为别名。
+生成 NotGarupa 的全部音效条目：原作的判定音（Perfect / Great / Good、Flick、方向键 1–3 连）、空击、技能、Long 按住音与松开等，名称与原作 cue 名一致，另附 Sonolus 标准名（`#PERFECT`、`#GREAT`、`#GOOD`、`#HOLD` 等）作为别名。
 
 默认运行即生成完整资源，没有选择单个条目的参数。
 

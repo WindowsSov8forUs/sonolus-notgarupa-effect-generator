@@ -1,7 +1,7 @@
 // Package effect builds the NotGarupa effect items: for every tap SE skin a
 // player can end up with (the normal SE settings and the special skins'
 // sound effect components, see internal/master), the original game's
-// judgement, hold, skill, clear and UI cues, named exactly as the original
+// judgement, hold, skill and UI cues, named exactly as the original
 // cues, plus the standard Sonolus clip names as aliases. The directional
 // flick SE is fixed to directionalflickskin00, as in the original.
 //
@@ -81,9 +81,6 @@ var sharedCues = []cueSource{
 	{name: "SE_RHYTHM_TAP_SKILL", bundle: "sound/common", file: "SE_RHYTHM_TAP_SKILL.mp3"},
 	{name: "SE_RHYTHM_CUTIN_SKILL", bundle: "sound/common", file: "SE_RHYTHM_CUTIN_SKILL.mp3"},
 	{name: "SE_RHYTHM_CUTIN_AUDIENCE", bundle: "sound/common", file: "SE_RHYTHM_CUTIN_AUDIENCE.mp3"},
-	{name: "SE_RHYTHM_FULLCOMBO", bundle: "sound/common", file: "SE_RHYTHM_FULLCOMBO.mp3"},
-	{name: "SE_RHYTHM_CLEAR", bundle: "sound/common", file: "SE_RHYTHM_CLEAR.mp3"},
-	{name: "SE_RHYTHM_CLEAR_VO", bundle: "sound/common", file: "SE_RHYTHM_CLEAR_VO.mp3"},
 	{name: "SE_RHYTHM_GAYA", bundle: "sound/common", file: "SE_RHYTHM_GAYA.mp3", loop: true, note: "crowd loop, whole buffer"},
 	{name: "decide_1", file: decide1APKPath, note: "pause/dialog button"},
 }
