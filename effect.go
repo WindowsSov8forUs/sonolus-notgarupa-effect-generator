@@ -20,7 +20,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"image/color"
 	"math"
 	"net/http"
 	"path/filepath"
@@ -35,7 +34,6 @@ import (
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/bestdori"
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/cdn"
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/cri"
-	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/imgutil"
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/master"
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/packout"
 	"github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/internal/unity"
@@ -466,10 +464,7 @@ func generate(bd *bestdori.Client, bundles *cdn.Client, spec master.Effect, shar
 	if err != nil {
 		return nil, err
 	}
-	thumb, err := imgutil.EncodePNG(imgutil.Solid(64, 64, color.NRGBA{0xFF, 0x3B, 0x72, 0xFF}))
-	if err != nil {
-		return nil, err
-	}
+	thumb := thumbnailPNG
 	sort.SliceStable(meta, func(i, j int) bool { return meta[i].AliasFor == "" && meta[j].AliasFor != "" })
 	limits := map[string]int{}
 	for name, c := range sheet {
