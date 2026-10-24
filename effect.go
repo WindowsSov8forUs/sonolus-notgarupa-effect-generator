@@ -205,7 +205,7 @@ type SourceTree struct{ src *packout.Source }
 
 // CreateSourceTree (re)creates root as an empty sonolus-pack source tree.
 func CreateSourceTree(root string) (*SourceTree, error) {
-	src, err := packout.Init(root, packout.T("NotGarupa Effects", "NotGarupa 音效", "NotGarupa 効果音"))
+	src, err := packout.Init(root, packout.T("NotGarupa Effects", "NotGarupa 音效", "NotGarupa 音效", "NotGarupa 効果音"))
 	if err != nil {
 		return nil, err
 	}
@@ -484,13 +484,14 @@ func generate(bd *bestdori.Client, bundles *cdn.Client, spec master.Effect, shar
 		Item: database.DatabaseEffectItem{
 			Name:     spec.Name(),
 			Version:  packout.EffectVersion,
-			Title:    packout.T(title, title, title),
-			Subtitle: packout.T("BanG Dream! Girls Band Party!", "BanG Dream! 少女乐团派对！", "バンドリ！ ガールズバンドパーティ！"),
-			Author:   packout.T("GirlsBandParty", "GirlsBandParty", "GirlsBandParty"),
+			Title:    packout.L(title),
+			Subtitle: packout.T("BanG Dream! Girls Band Party!", "BanG Dream! 少女乐团派对！", "BanG Dream! 少女樂團派對！", "バンドリ！ ガールズバンドパーティ！"),
+			Author:   packout.T("GirlsBandParty", "GirlsBandParty", "GirlsBandParty", "GirlsBandParty"),
 			Tags:     []database.DatabaseTag{},
 			Description: packout.T(
 				fmt.Sprintf("Tap SE: %s, directional SE: %s, format: wav.", tapse, master.DirectionalSE),
 				fmt.Sprintf("打击音效：%s，方向滑键音效：%s，格式：wav。", tapse, master.DirectionalSE),
+				fmt.Sprintf("打擊音效：%s，方向滑鍵音效：%s，格式：wav。", tapse, master.DirectionalSE),
 				fmt.Sprintf("タップSE：%s、方向フリックSE：%s、形式：wav。", tapse, master.DirectionalSE)),
 		},
 		Data:      resource.EffectData{Clips: clips},
