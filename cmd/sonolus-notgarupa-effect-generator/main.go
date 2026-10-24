@@ -59,7 +59,11 @@ func main() {
 	if err != nil {
 		cli.Fatal(err)
 	}
-	if err := cli.Pack(source, pack); err != nil {
+	order, err := effect.Items()
+	if err != nil {
+		cli.Fatal(err)
+	}
+	if err := cli.Pack(source, pack, order); err != nil {
 		cli.Fatal(err)
 	}
 	fmt.Printf("%d effects -> %s\n", count, common.Out)
