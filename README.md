@@ -6,10 +6,12 @@
 
 ## 条目
 
-条目由原作 JP 10.1.4 的皮肤主数据决定（`internal/master`）：玩家能用到的每个打击音皮肤（SE 设置）对应一个条目 `notgarupa-<SE 皮肤>`，共 15 个：
+条目由原作 JP 10.1.4 的皮肤主数据决定（`internal/master`）：玩家能用到的每个打击音皮肤（SE 设置）对应一个条目 `garupa-<SE 皮肤>`（标题为原作名称，如「SEスキン00」「ペルソナコラボ」），共 15 个：
 
 - 普通 SE 设置：`skin00`–`skin03`；
 - 特殊皮肤（Collaboration / Limited）的 SE 组件：`skin_persona`、`skin_miku`、`skin_cafe`、`skin_maid`、`skin_coin`、`skin_witch`、`skinapril2021`、`skin_stage`、`skin_delta`、`skin_april2018`、`skin_april2019`。
+
+名称来自原作主数据（`internal/master/skins.json` 的 `names`，取 JP、EN、TW、CN 中第一个有的名称）：普通设置用各行的皮肤名（`TYPE1`、`レーンスキン00`、`エフェクトスキン00`、`SEスキン00`、`デフォルト背景` 等），Collaboration 行用季节描述（`MasterSeasonSpecial.description`，如 `ペルソナコラボ`），Limited 行用限定皮肤名（如 `エイプリルフール2019`）；同一组件出现在多行时取 Limited 行，其次取季节最早的行。特殊行替换的各轴是一个固定组合，条目名只写一次（该组合的第一个 bundle），标题只写一次（该行的名称）。条目的作者为 `GirlsBandParty`，副标题为游戏名。
 
 方向键音效在原作中固定为 `directionalflickskin00`，所有条目相同；`sound/common` 的技能、Full Combo、Clear 等 cue 与 APK 内置的 `decide_1` 也相同。主数据中无法获取的条目已整体排除（见 `internal/master` 的 `Excluded`）。
 

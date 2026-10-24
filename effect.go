@@ -479,14 +479,14 @@ func generate(bd *bestdori.Client, bundles *cdn.Client, spec master.Effect, shar
 		limits[name] = c.Limit
 	}
 	tapse := spec.SoundEffect
-	title := fmt.Sprintf("NotGarupa %s", tapse)
+	title := spec.Title
 	return &Result{
 		Item: database.DatabaseEffectItem{
 			Name:     spec.Name(),
 			Version:  packout.EffectVersion,
 			Title:    packout.T(title, title, title),
-			Subtitle: packout.T("BanG Dream! Girls Band Party! (original cues)", "BanG Dream! 少女乐团派对！（原作音效）", "バンドリ！ ガールズバンドパーティ！（原作効果音）"),
-			Author:   packout.T("sonolus-notgarupa-effect-generator", "sonolus-notgarupa-effect-generator", "sonolus-notgarupa-effect-generator"),
+			Subtitle: packout.T("BanG Dream! Girls Band Party!", "BanG Dream! 少女乐团派对！", "バンドリ！ ガールズバンドパーティ！"),
+			Author:   packout.T("GirlsBandParty", "GirlsBandParty", "GirlsBandParty"),
 			Tags:     []database.DatabaseTag{},
 			Description: packout.T(
 				fmt.Sprintf("Tap SE: %s, directional SE: %s, format: wav.", tapse, master.DirectionalSE),
