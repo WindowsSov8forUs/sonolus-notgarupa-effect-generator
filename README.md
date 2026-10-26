@@ -37,7 +37,7 @@ Miss 无音效（生成静音以便别名完整）。
 
 ## 命令行
 
-从 GitHub Release 下载对应平台的压缩包（linux / windows / darwin，amd64 / arm64；由 `.github/workflows/build.yml` 矩阵编译，推送 `v*` 标签时发布），解压后直接运行；也可以用 Go 安装或在本仓库中运行（仓库为私有，需要 `GOPRIVATE=github.com/WindowsSov8forUs/*` 和可访问仓库的 git 凭据）：
+从 GitHub Release 下载对应平台的压缩包（linux / windows / darwin，amd64 / arm64；由 `.github/workflows/build.yml` 矩阵编译，推送 `v*` 标签时发布），解压后直接运行；也可以用 Go 安装或在本仓库中运行：
 
 ```sh
 go install github.com/WindowsSov8forUs/sonolus-notgarupa-effect-generator/cmd/sonolus-notgarupa-effect-generator@latest
@@ -88,7 +88,7 @@ err = effect.Generate(ctx, effect.Options{
 - `Result.Files()` 按 item.json 的字段名返回资源字节："thumbnail"、"data"（已 gzip 压缩）、"audio"。
 - `effect.CreateSourceTree(dir)` 重建 sonolus-pack 源目录，`(*SourceTree).Add(r)` 写入一个条目（命令行就是 `Generate` + `SourceTree` + sonolus-pack-go）。
 
-在 sonolus-server-go 中注册（作为依赖同样需要 `GOPRIVATE`；资源字段填入仓库地址）：
+在 sonolus-server-go 中注册（资源字段填入仓库地址）：
 
 ```go
 err = effect.Generate(ctx, opts, func(r *effect.Result) error {
