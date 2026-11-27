@@ -21,7 +21,7 @@ func TestItems(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(items) != 15 || items[0] != "garupa-skin00" {
+	if len(items) != 16 || items[0] != "garupa-skin00" || items[15] != "garupa-skin10001" {
 		t.Fatalf("items %v", items)
 	}
 }

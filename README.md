@@ -6,10 +6,10 @@
 
 ## 条目
 
-条目由原作 JP 10.1.4 的皮肤主数据决定（`internal/master`）：玩家能用到的每个打击音皮肤（SE 设置）对应一个条目 `garupa-<SE 皮肤>`（标题为原作名称，如「SEスキン00」「ペルソナコラボ」），共 15 个：
+条目由原作的皮肤主数据（JP 主数据的各行与 Limited 1–5，以及只存在于大陆服主数据的 Collaboration 100001、Limited 10001 / 10002；后者带 `"server": "cn"`，资源取自大陆服）决定（`internal/master`）：玩家能用到的每个打击音皮肤（SE 设置）对应一个条目 `garupa-<SE 皮肤>`（标题为原作名称，如「SEスキン00」「ペルソナコラボ」），共 16 个：
 
 - 普通 SE 设置：`skin00`–`skin03`；
-- 特殊皮肤（Collaboration / Limited）的 SE 组件：`skin_persona`、`skin_miku`、`skin_cafe`、`skin_maid`、`skin_coin`、`skin_witch`、`skinapril2021`、`skin_stage`、`skin_delta`、`skin_april2018`、`skin_april2019`。
+- 特殊皮肤（Collaboration / Limited）的 SE 组件：`skin_persona`、`skin_miku`、`skin_cafe`、`skin_maid`、`skin_coin`、`skin_witch`、`skinapril2021`、`skin_stage`、`skin_delta`、`skin_april2018`、`skin_april2019`，以及大陆服 Collaboration 100001 的 `skin10001`。
 
 名称来自原作各服主数据（`internal/master/skins.json` 的 `names`）：每种语言用对应服的名称——日文 JP、英文 EN、繁体中文 TW、简体中文 CN，该服没有时取 JP、EN、TW、CN 中第一个有的名称（例如 Roselia 的 lane：「Roselia Lane」「Roselia的軌跡」「Roselia的按键条皮肤」）；普通设置用各行的皮肤名（`TYPE1`、`レーンスキン00`、`エフェクトスキン00`、`SEスキン00`、`デフォルト背景` 等），Collaboration 行用季节描述（`MasterSeasonSpecial.description`，如 `ペルソナコラボ`），Limited 行用限定皮肤名（如 `エイプリルフール2019`）；同一组件出现在多行时取 Limited 行，其次取季节最早的行。特殊行替换的各轴是一个固定组合，条目名只写一次（该组合的第一个 bundle），标题只写一次（该行的名称）。条目的作者为 `GirlsBandParty`，副标题为游戏名。所有条目的封面为游戏 10.0 版图标的无 logo 版本（`assets/thumbnail.png`，由 `Gdp10.0icon_nologo.webp` 的 1024×1024 缩小为 256×256 PNG）。包中（`db.json`）的条目按原作主数据的顺序排列（即 `Items()` 的顺序）：先是普通设置，按各轴 master 行的顺序组合（默认组合在最前）；其后是特殊组合，按 Collaboration、Limited 的行号；HABAHIRO 在最后。sonolus-pack 按目录名列出条目，打包后再按这个顺序重排。
 
@@ -17,8 +17,8 @@
 
 ## 素材来源
 
-- 音频：Bestdori 的 MP3（`sound/tapseskin/<id>`、`sound/common` 等，按 `-regions` 的服务器优先级取第一个拥有该 bundle 的服务器），无缝解码为 PCM（去掉 MP3 编码器延迟，起点与原作一致），输出 WAV。只有 APK 内置的 `decide_1`（不在 AssetBundle 中）随项目放在 `assets/apk/sound/common-se/`。
-- 循环点与同时发声上限：原作 cue sheet。官方资源 CDN 的 `sound/tapseskin/<id>` bundle 中的 TextAsset `TapSE.acb`（方向键为 `DirectionalFlickSE.acb`），程序解析 CRI @UTF 表，沿 Cue → Sequence（上限命令）→ Track → Synth → Waveform（→ WaveformExtensionData 循环区间）读取。资源版本固定为 `internal/cdn` 的 `PinnedVersion`。
+- 音频：Bestdori 的 MP3（`sound/tapseskin/<id>`、`sound/common` 等，按 `-regions` 的服务器优先级取第一个拥有该 bundle 的服务器；大陆服主数据行的 bundle 先在 cn 查找），无缝解码为 PCM（去掉 MP3 编码器延迟，起点与原作一致），输出 WAV。只有 APK 内置的 `decide_1`（不在 AssetBundle 中）随项目放在 `assets/apk/sound/common-se/`。
+- 循环点与同时发声上限：原作 cue sheet。官方资源 CDN 的 `sound/tapseskin/<id>` bundle 中的 TextAsset `TapSE.acb`（方向键为 `DirectionalFlickSE.acb`），程序解析 CRI @UTF 表，沿 Cue → Sequence（上限命令）→ Track → Synth → Waveform（→ WaveformExtensionData 循环区间）读取。JP 资源版本固定为 `internal/cdn` 的 `PinnedVersion`（`10.2.0.190_b3da1643…`）；大陆服主数据行的 bundle 取自大陆服资源 CDN（`https://line3-prod-patch-bd.bilibiligame.net/assetbundle/<版本>/Android/<bundle>`，版本固定为 `internal/cdn` 的 `PinnedCNVersion`（`10.1.3.0`）），其余取自 JP。`skin10001` 的 `TapSE.acb` 只在大陆服 CDN 上（JP CDN 没有这个 bundle）。
 
 下载都写入 `-cache`（默认当前目录的 `.cache/`）。
 
@@ -28,7 +28,7 @@
 
 - `SE_RHYTHM_TAP_LONG`：整个 cue。
 - `#loop`：原作循环区间 `[LoopStart, LoopEnd)` 的采样，可无缝 PlayLooped。
-- `#intro`：只有循环起点不为 0 时才有（`skin_maid`、`skin_coin`、`skinapril2021`、`skin_stage`、`skin_delta`），即 `[0, LoopStart)`；先播放它，`introSeconds` 后开始播放 `#loop`。
+- `#intro`：只有循环起点不为 0 时才有（`skin_maid`、`skin_coin`、`skinapril2021`、`skin_stage`、`skin_delta`、`skin10001`），即 `[0, LoopStart)`；先播放它，`introSeconds` 后开始播放 `#loop`。
 - `#release`：松开时的 0.3 s 线性淡出尾（原作代码常量）。
 - `skin_april2019` 的按住 cue 不循环（只播放一次），没有 `#loop`，`#HOLD` 指向整个 cue。
 - 标记 clip（1 采样的静音）：Sonolus 引擎读不到 clip 时长与条目元数据，所以按住音的条目属性以 clip 是否存在表示，引擎在初始化时读取：`notgarupa/hold/introUsBit<k>` 为 `#intro` 时长（µs）的第 k 位，`notgarupa/hold/onceUsBit<k>` 为不循环的 cue 时长（µs）的第 k 位，`notgarupa/hold/noCueLimit` 表示按住 cue 没有同时发声上限（`skin_delta`）。skin00 等普通条目没有标记。
@@ -61,8 +61,8 @@ sonolus-notgarupa-effect-generator
 | `-out` | `out` | 输出目录，其中的 `source/`、`pack/`、`contracts/` 每次重建 |
 | `-cache` | `.cache` | 下载缓存目录 |
 | `-offline` | false | 只使用缓存中的下载 |
-| `-regions` | `jp,en,tw,cn,kr` | Bestdori 服务器优先级。各服有独占素材，每个 bundle 取自第一个拥有它的服务器（该 bundle 的全部文件都来自同一服）；某服没有时记录在缓存中，`-offline` 重跑时选择相同的服务器 |
-| `-asset-version` | 固定版本 | 官方资源 CDN 的资源版本（cue sheet） |
+| `-regions` | `jp,en,tw,cn,kr` | Bestdori 服务器优先级。各服有独占素材，每个 bundle 取自第一个拥有它的服务器（该 bundle 的全部文件都来自同一服；大陆服主数据行的 bundle 先查 cn）；某服没有时记录在缓存中，`-offline` 重跑时选择相同的服务器 |
+| `-asset-version` | 固定版本 | JP 官方资源 CDN 的资源版本（cue sheet；大陆服 bundle 的版本固定） |
 | `-j` | 0（每个 CPU 一个） | 并行生成的条目数 |
 | `-v` | false | 输出下载日志 |
 | `-version` | false | 输出版本号后退出 |
